@@ -1,2 +1,6 @@
 var Alt = require('alt');
-module.exports = new Alt();
+var alt = new Alt();
+
+window.Alt = alt;
+
+module.exports = alt;

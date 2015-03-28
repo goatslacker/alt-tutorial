@@ -12,6 +12,10 @@ class LocationStore {
       handleLocationsFailed: LocationActions.LOCATIONS_FAILED,
       setFavorites: LocationActions.FAVORITE_LOCATION
     });
+    
+    this.exportPublicMethods({
+      getLocation: this.getLocation
+    })
   }
 
   handleUpdateLocations(locations) {
@@ -59,7 +63,7 @@ class LocationStore {
     });
   }
 
-  static getLocation(id) {
+  getLocation(id) {
     var { locations } = this.getState();
     for (var i = 0; i < locations.length; i += 1) {
       if (locations[i].id === id) {

@@ -1,6 +1,7 @@
 var Alt = require('alt');
 var alt = new Alt();
+var chromeDebug = require('alt/utils/chromeDebug')
 
-window.Alt = alt;
+chromeDebug(alt);
 
 module.exports = alt;

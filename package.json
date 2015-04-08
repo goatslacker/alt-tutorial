@@ -4,7 +4,7 @@
   "description": "A simple flux tutorial built with alt and react",
   "main": "server.js",
   "dependencies": {
-    "alt": "^0.14.2",
+    "alt": "^0.15.4",
     "react": "^0.12.2"
   },
   "devDependencies": {

@@ -20,18 +20,20 @@ var Favorites = React.createClass({
 
 var AllLocations = React.createClass({
   addFave(ev) {
-    var location = LocationStore.getLocation(Number(ev.target.getAttribute('data-id')));
+    var location = LocationStore.getLocation(
+      Number(ev.target.getAttribute('data-id'))
+    );
     LocationActions.favoriteLocation(location);
   },
 
   render() {
-    if (this.props.errorMessage) {
+    if (LocationStore.hasError()) {
       return (
         <div>Something is wrong</div>
       );
     }
 
-    if (!this.props.locations.length) {
+    if (LocationStore.isLoading()) {
       return (
         <div>
           <img src="ajax-loader.gif" />
@@ -43,7 +45,9 @@ var AllLocations = React.createClass({
       <ul>
         {this.props.locations.map((location, i) => {
           var faveButton = (
-            <button onClick={this.addFave} data-id={location.id}>Favorite</button>
+            <button onClick={this.addFave} data-id={location.id}>
+              Favorite
+            </button>
           );
 
           return (
@@ -59,7 +63,7 @@ var AllLocations = React.createClass({
 
 var Locations = React.createClass({
   componentDidMount() {
-    LocationActions.fetchLocations();
+    LocationStore.fetchLocations();
   },
 
   render() {

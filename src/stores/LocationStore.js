@@ -12,7 +12,7 @@ class LocationStore {
       handleLocationsFailed: LocationActions.LOCATIONS_FAILED,
       setFavorites: LocationActions.FAVORITE_LOCATION
     });
-    
+
     this.exportPublicMethods({
       getLocation: this.getLocation
     })

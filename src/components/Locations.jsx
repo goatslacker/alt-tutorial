@@ -1,48 +1,37 @@
 var React = require('react');
+var AltContainer = require('alt/AltContainer');
 var LocationStore = require('../stores/LocationStore');
 var FavoritesStore = require('../stores/FavoritesStore');
 var LocationActions = require('../actions/LocationActions');
 
-var Locations = React.createClass({
-  getStoreState() {
-    return {
-      locations: LocationStore.getState(),
-      favorites: FavoritesStore.getState()
-    };
-  },
-  getInitialState() {
-    return this.getStoreState();
-  },
+var Favorites = React.createClass({
+  render() {
+    return (
+      <ul>
+        {this.props.locations.map((location, i) => {
+          return (
+            <li key={i}>{location.name}</li>
+          );
+        })}
+      </ul>
+    );
+  }
+});
 
-  componentDidMount() {
-    LocationStore.listen(this.onChange);
-    FavoritesStore.listen(this.onChange);
-
-    LocationActions.fetchLocations();
-  },
-
-  componentWillUnmount() {
-    LocationStore.unlisten(this.onChange);
-    FavoritesStore.unlisten(this.onChange);
-  },
-
-  onChange() {
-    this.setState(this.getStoreState());
-  },
-
+var AllLocations = React.createClass({
   addFave(ev) {
     var location = LocationStore.getLocation(Number(ev.target.getAttribute('data-id')));
     LocationActions.favoriteLocation(location);
   },
 
   render() {
-    if (this.state.errorMessage) {
+    if (this.props.errorMessage) {
       return (
         <div>Something is wrong</div>
       );
     }
 
-    if (!this.state.locations.locations.length) {
+    if (!this.props.locations.length) {
       return (
         <div>
           <img src="ajax-loader.gif" />
@@ -50,29 +39,41 @@ var Locations = React.createClass({
       )
     }
 
+    return (
+      <ul>
+        {this.props.locations.map((location, i) => {
+          var faveButton = (
+            <button onClick={this.addFave} data-id={location.id}>Favorite</button>
+          );
 
+          return (
+            <li key={i}>
+              {location.name} {location.has_favorite ? '<3' : faveButton}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+});
+
+var Locations = React.createClass({
+  componentDidMount() {
+    LocationActions.fetchLocations();
+  },
+
+  render() {
     return (
       <div>
         <h1>Locations</h1>
-        <ul>
-          {this.state.locations.locations.map((location) => {
-            var faveButton = (
-              <button onClick={this.addFave} data-id={location.id}>Favorite</button>
-            );
+        <AltContainer store={LocationStore}>
+          <AllLocations />
+        </AltContainer>
 
-            return (
-              <li>{location.name} {location.has_favorite ? '<3' : faveButton}</li>
-            );
-          })}
-        </ul>
         <h1>Favorites</h1>
-        <ul>
-          {this.state.favorites.locations.map((location) => {
-            return (
-              <li>{location.name}</li>
-            );
-          })}
-        </ul>
+        <AltContainer store={FavoritesStore}>
+          <Favorites />
+        </AltContainer>
       </div>
     );
   }

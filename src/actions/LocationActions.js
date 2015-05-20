@@ -1,5 +1,4 @@
 var alt = require('../alt');
-var LocationsFetcher = require('../utils/LocationsFetcher');
 
 class LocationActions {
   updateLocations(locations) {

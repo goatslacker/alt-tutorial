@@ -3,5 +3,5 @@ var Locations = require('./components/Locations.jsx');
 
 React.render(
   <Locations />,
-  document.body
+  document.getElementById('ReactApp')
 );

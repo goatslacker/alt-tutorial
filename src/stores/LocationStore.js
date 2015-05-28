@@ -6,6 +6,7 @@ var FavoritesStore = require('./FavoritesStore');
 class LocationStore {
   constructor() {
     this.locations = [];
+    this.errorMessage = null;
 
     this.bindListeners({
       handleUpdateLocations: LocationActions.UPDATE_LOCATIONS,

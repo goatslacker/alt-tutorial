@@ -27,9 +27,9 @@ var AllLocations = React.createClass({
   },
 
   render() {
-    if (LocationStore.hasError()) {
+    if (this.props.errorMessage {
       return (
-        <div>Something is wrong</div>
+        <div>{this.props.errorMessage}</div>
       );
     }
 

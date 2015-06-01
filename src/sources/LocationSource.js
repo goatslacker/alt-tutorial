@@ -38,7 +38,7 @@ var LocationSource = {
 
       local() {
         // Never check locally, always fetch remotely.
-        return false;
+        return null;
       },
 
       success: LocationActions.updateLocations,

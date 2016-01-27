@@ -4,8 +4,11 @@
   "description": "A simple flux tutorial built with alt and react",
   "main": "server.js",
   "dependencies": {
-    "alt": "^0.16.0",
-    "react": "^0.12.2"
+    "alt": "^0.18.1",
+    "alt-container": "^1.0.1",
+    "alt-utils": "^1.0.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
   },
   "devDependencies": {
     "browserify": "^8.0.3",

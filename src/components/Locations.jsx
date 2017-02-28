@@ -29,7 +29,7 @@ var Favorites = React.createClass({
 });
 
 var AllLocations = React.createClass({
-  self:this,
+ 
   addFave(ev) {
     var location = LocationStore.getLocation(
       Number(ev.target.getAttribute('data-id'))
@@ -44,9 +44,6 @@ var AllLocations = React.createClass({
     LocationActions.addLocations(location);
     document.getElementById('city').value ="";
   },
-  removeSelected(){},
-  addToRemoveList(){},
-
   render() {
     if (this.props.errorMessage) {
       return (
@@ -106,13 +103,3 @@ var Locations = React.createClass({
 });
 
 module.exports = Locations;
-
-// <h1>Locations</h1>
-//         <AltContainer store={LocationStore}>
-//           <AllLocations />
-//         </AltContainer>
-
-//         <h1>Favorites</h1>
-//         <AltContainer store={FavoritesStore}>
-//           <Favorites />
-//         </AltContainer>

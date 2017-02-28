@@ -4,7 +4,6 @@ var LocationActions = require('../actions/LocationActions');
 class FavoritesStore {
   constructor() {
     this.locations = [];
-
     this.bindListeners({
       addFavoriteLocation: LocationActions.FAVORITE_LOCATION,
       removeFavoriteLocation: LocationActions.NOT_FAVORITE_LOCATION,

@@ -27,7 +27,6 @@ class LocationActions {
   }
   addToFavoriteTodo(i){
     this.dispatch(i);
-    console.log('why')
   }
 }
 

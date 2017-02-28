@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "browserify -t [reactify --es6] src/App.jsx > build/app.js",
-    "start": "npm run build && open 'index.html' "
+    "start": "npm run build && xdg-open 'index.html' "
   },
   "author": "Josh Perez <josh@goatslacker.com>",
   "license": "MIT"

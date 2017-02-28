@@ -8,6 +8,9 @@ class LocationActions {
   fetchLocations() {
     this.dispatch();
   }
+  addLocations(location) {
+    this.dispatch(location);
+  }
 
   locationsFailed(errorMessage) {
     this.dispatch(errorMessage);
@@ -15,6 +18,15 @@ class LocationActions {
 
   favoriteLocation(location) {
     this.dispatch(location);
+  }
+  notFavoriteLocation(id) {
+    this.dispatch(id);
+  }
+  addTodo(todo){
+    this.dispatch(todo);
+  }
+  addToFavoriteTodo(i){
+    this.dispatch(i);
   }
 }
 

@@ -5,12 +5,22 @@ var FavoritesStore = require('../stores/FavoritesStore');
 var LocationActions = require('../actions/LocationActions');
 
 var Favorites = React.createClass({
+  removeFave(ev) {
+    const cid = Number(ev.target.getAttribute('data-id'));
+    console.log(cid);
+    LocationActions.notFavoriteLocation(cid);
+  },
   render() {
     return (
       <ul>
         {this.props.locations.map((location, i) => {
+          var faveButton = (
+            <button onClick={this.removeFave} data-id={location.id}>
+              Favorite
+            </button>
+          );
           return (
-            <li key={i}>{location.name}</li>
+            <li key={i}>{location.name}  {faveButton}</li>
           );
         })}
       </ul>
@@ -19,20 +29,27 @@ var Favorites = React.createClass({
 });
 
 var AllLocations = React.createClass({
+ 
   addFave(ev) {
     var location = LocationStore.getLocation(
       Number(ev.target.getAttribute('data-id'))
     );
+    console.log(location)
     LocationActions.favoriteLocation(location);
   },
-
+  addCity(){
+    nextId = this.props.locations.length;
+    const city = document.getElementById('city').value;
+    const location = {id: nextId, name: city ,has_favorite: false};
+    LocationActions.addLocations(location);
+    document.getElementById('city').value ="";
+  },
   render() {
     if (this.props.errorMessage) {
       return (
         <div>{this.props.errorMessage}</div>
       );
     }
-
     if (LocationStore.isLoading()) {
       return (
         <div>
@@ -40,8 +57,10 @@ var AllLocations = React.createClass({
         </div>
       )
     }
-
     return (
+      <div>
+        <input id="city"ref="city" type="text" />
+        <button onClick={this.addCity}>Add</button>
       <ul>
         {this.props.locations.map((location, i) => {
           var faveButton = (
@@ -49,7 +68,7 @@ var AllLocations = React.createClass({
               Favorite
             </button>
           );
-
+        
           return (
             <li key={i}>
               {location.name} {location.has_favorite ? '<3' : faveButton}
@@ -57,6 +76,7 @@ var AllLocations = React.createClass({
           );
         })}
       </ul>
+      </div>
     );
   }
 });
@@ -65,7 +85,6 @@ var Locations = React.createClass({
   componentDidMount() {
     LocationStore.fetchLocations();
   },
-
   render() {
     return (
       <div>
